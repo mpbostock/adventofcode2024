@@ -10,7 +10,7 @@ object Day02 {
     data class RedNoseReactorReport(val levels: List<Int>) {
         private val diffs: List<Int> by lazy { levels.zipWithNext { a, b -> b - a } }
         private val dampenedReports: List<RedNoseReactorReport> by lazy {
-            (0..levels.size).map {
+            levels.indices.map {
                 RedNoseReactorReport(levels.filterIndexed { index, _ -> index != it })
             }
         }
