@@ -3,13 +3,9 @@ package mpbostock
 import kotlin.math.abs
 
 object Day01 {
-    fun partOne(input: List<String>): Int {
-        return HistoricLocations.fromInput(input).sumOfDistances()
-    }
+    fun partOne(input: List<String>): Int = HistoricLocations.fromInput(input).sumOfDistances()
 
-    fun partTwo(input: List<String>): Int {
-        return HistoricLocations.fromInput(input).similarityScore()
-    }
+    fun partTwo(input: List<String>): Int = HistoricLocations.fromInput(input).similarityScore()
 
     private val input = FileIO.readInput("day01input.txt") { s -> s }
 
@@ -25,14 +21,12 @@ object Day01 {
         }
 
         companion object {
-            fun fromInput(input: List<String>): HistoricLocations {
-                return input.fold(HistoricLocations()) { acc, row ->
-                    val split = row.split("   ")
-                    acc.copy(
-                        leftList = acc.leftList + split[0].toInt(),
-                        rightList = acc.rightList + split[1].toInt()
-                    )
-                }
+            fun fromInput(input: List<String>): HistoricLocations = input.fold(HistoricLocations()) { acc, row ->
+                val split = row.split("   ")
+                acc.copy(
+                    leftList = acc.leftList + split[0].toInt(),
+                    rightList = acc.rightList + split[1].toInt()
+                )
             }
         }
     }

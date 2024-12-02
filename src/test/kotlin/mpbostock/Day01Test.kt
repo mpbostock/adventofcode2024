@@ -1,5 +1,8 @@
 package mpbostock
 
+import mpbostock.Day01.HistoricLocations
+import mpbostock.Day01.partOne
+import mpbostock.Day01.partTwo
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -14,19 +17,19 @@ internal class Day01Test {
     )
     @Test
     fun `historic locations are parsed correctly`() {
-        val locations = Day01.HistoricLocations.fromInput(testData)
+        val locations = HistoricLocations.fromInput(testData)
         assertEquals(listOf(3, 4, 2, 1, 3, 3), locations.leftList)
         assertEquals(listOf(4, 3, 5, 3, 9, 3), locations.rightList)
     }
     @Test
     fun `test part one`() {
-        val partOne = Day01.partOne(testData)
+        val partOne = partOne(testData)
         assertEquals(11, partOne)
     }
 
     @Test
     fun `test part two`() {
-        val partTwo = Day01.partTwo(testData)
+        val partTwo = partTwo(testData)
         assertEquals(31, partTwo)
     }
 
