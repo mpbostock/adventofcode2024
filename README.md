@@ -1,4 +1,4 @@
-# Advent of Code Template
+# Advent of Code 2024
 
 A standard Kotlin Gradle project for AoC template solutions and tests. This comes with a built in Gradle wrapper, so no need to install Gradle
 
