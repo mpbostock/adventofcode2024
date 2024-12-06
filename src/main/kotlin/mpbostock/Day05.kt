@@ -20,11 +20,8 @@ object Day05 {
         val pagesToProduce: List<Int>,
         private val afterMap: Map<Int, List<Int>>
     ) {
-        val indicesMatchOrder: List<Boolean> by lazy {
-            pagesToProduce.indices.map { index ->
-                expectedOrder[index] == pagesToProduce[index]
-            }
-        }
+        val matchesExpectedOrder: Boolean
+            get() = expectedOrder == pagesToProduce
 
         private val expectedOrder: List<Int> by lazy {
             pagesToProduce
@@ -50,10 +47,10 @@ object Day05 {
 
     data class PrintQueue(val pageUpdates: List<Update>) {
         fun correctUpdatesMiddlePages(): List<Int> =
-            pageUpdates.filter { update -> update.indicesMatchOrder.all { it } }.map { it.middlePage }
+            pageUpdates.filter { update -> update.matchesExpectedOrder }.map { it.middlePage }
 
         fun incorrectUpdatesFixedMiddlePages(): List<Int> =
-            pageUpdates.filter { update -> update.indicesMatchOrder.any { !it } }.map { it.fixed.middlePage }
+            pageUpdates.filter { update -> !update.matchesExpectedOrder }.map { it.fixed.middlePage }
 
         companion object {
             fun fromInput(input: List<String>): PrintQueue {
