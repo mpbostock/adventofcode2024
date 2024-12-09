@@ -17,24 +17,21 @@ object Day07 {
         Concatenate({ a, b -> "$a$b".toLong() });
 
         companion object {
-            val defaultOperators = arrayOf(Add, Multiply)
-            fun combinations(
-                n: Int,
-                operators: Array<Operator> = defaultOperators
-            ): List<List<Operator>> = (1..n).fold(listOf(listOf())) { acc, _ ->
-                acc.flatMap { combination ->
-                    operators.map { operator -> combination + operator }
+            private fun operators(withConcatenation: Boolean): Array<Operator> =
+                if (withConcatenation) values() else arrayOf(Add, Multiply)
+
+            fun combinations(n: Int, withConcatenation: Boolean = false): List<List<Operator>> =
+                (1..n).fold(listOf(listOf())) { acc, _ ->
+                    acc.flatMap { combination ->
+                        operators(withConcatenation).map { operator -> combination + operator }
+                    }
                 }
-            }
         }
     }
 
     data class Equation(val result: Long, val values: List<Long>) {
         fun canBeTrue(withConcatenation: Boolean = false): Boolean =
-            Operator.combinations(
-                values.size - 1,
-                if (withConcatenation) Operator.values() else Operator.defaultOperators
-            )
+            Operator.combinations(values.size - 1, withConcatenation)
                 .map { it.zip(values.drop(1)) }
                 .any {
                     it.fold(values.first()) { total, (operator, value) ->
