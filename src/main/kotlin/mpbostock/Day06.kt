@@ -36,7 +36,7 @@ object Day06 {
         fun numStepsToLeaveLab(): Int = guardPatrol.distinctBy { it.first }.size
 
         fun numInfiniteLoops(): Int {
-            val simulatedObstaclePositions = guardPatrol.filter { it != startingGuard }.map { it.first }.distinct().asSequence()
+            val simulatedObstaclePositions = guardPatrol.filter { it != startingGuard }.map { it.first }.distinct()
             return simulatedObstaclePositions.fold(emptySet<Coordinate>()) { acc, curr ->
                 when {
                     acc.contains(curr) -> acc
