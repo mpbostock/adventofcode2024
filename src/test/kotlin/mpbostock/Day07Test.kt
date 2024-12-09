@@ -84,8 +84,8 @@ internal class Day07Test {
 
     @Test
     fun `equation cant be true with concatenation`() {
-        assertFalse(Equation(83, listOf(17, 5)).canBeTrue())
-        assertFalse(Equation(7290, listOf(6, 8, 6, 15)).canBeTrue())
+        assertFalse(Equation(83, listOf(17, 5)).canBeTrue(withConcatenation = true))
+        assertFalse(Equation(161011, listOf(16, 10, 13)).canBeTrue(withConcatenation = true))
     }
 
     @Test
