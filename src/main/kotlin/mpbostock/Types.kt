@@ -63,4 +63,16 @@ enum class Direction: PositionMover {
             NorthWest -> pos.copy(x = pos.x - 1, y = pos.y - 1)
         }
     }
+    fun turnRight(): Direction {
+        return when(this) {
+            North -> East
+            NorthEast -> SouthEast
+            East -> South
+            SouthEast -> SouthWest
+            South -> West
+            SouthWest -> NorthWest
+            West -> North
+            NorthWest -> NorthEast
+        }
+    }
 }
