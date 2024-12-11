@@ -43,10 +43,27 @@ interface Grid<T> {
     }
 }
 
-data class Coordinate(val x: Int, val y: Int)
+data class Coordinate(val x: Int, val y: Int) {
+    operator fun plus(other: Coordinate) = Coordinate(x + other.x, y + other.y)
+    operator fun minus(other: Coordinate) = Coordinate(x - other.x, y - other.y)
+}
 data class PositionedCell<T>(val pos: Coordinate, val cell: T)
 fun interface PositionMover {
     fun move(pos: Coordinate): Coordinate
+}
+fun List<Coordinate>.toLines(): List<Line> {
+    tailrec fun getLines(index: Int, otherIndices: List<Int>, acc: List<Line>): List<Line> {
+        return when {
+            otherIndices.isEmpty() -> acc
+            else -> {
+                getLines(index + 1, otherIndices.drop(1), acc + otherIndices.map { Line(this[index], this[it]) })
+            }
+        }
+    }
+    return getLines(0, this.indices.drop(1), emptyList())
+}
+data class Line(val start: Coordinate, val end: Coordinate) {
+    fun deltaXDeltaY() = Coordinate(end.x - start.x, end.y - start.y)
 }
 
 enum class Direction: PositionMover {

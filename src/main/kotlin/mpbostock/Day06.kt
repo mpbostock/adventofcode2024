@@ -41,9 +41,9 @@ object Day06 {
                 when {
                     acc.contains(curr) -> acc
                     else -> {
-                        val simulatedPatrol = patrol(setOf(startingGuard), startingGuard, { pos ->
+                        val simulatedPatrol = patrol(setOf(startingGuard), startingGuard) { pos ->
                             pos.isObstacle() || pos == curr
-                        })
+                        }
                         if (simulatedPatrol.isEmpty()) acc + curr else acc
                     }
                 }
