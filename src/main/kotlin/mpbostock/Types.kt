@@ -66,6 +66,7 @@ data class Line(val start: Coordinate, val end: Coordinate) {
     fun deltaXDeltaY() = Coordinate(end.x - start.x, end.y - start.y)
 }
 
+fun Int.isOdd(): Boolean = this % 2 == 1
 enum class Direction: PositionMover {
     North, NorthEast, East, SouthEast, South, SouthWest, West, NorthWest;
     override fun move(pos: Coordinate): Coordinate {
