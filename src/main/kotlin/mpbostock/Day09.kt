@@ -57,11 +57,7 @@ object Day09 {
         }
 
         fun getReorderedChecksum(): Long {
-            val blocks = getBlocks()
-            val reorderedBlocks = reorderBlocks(blocks)
-            return reorderedBlocks.filterIsInstance<File>().foldIndexed(0L) { index, acc, file ->
-                acc + index * file.id
-            }
+            return getChecksum(reorderBlocks(getBlocks()))
         }
 
         private fun getContiguous() = diskMap.foldIndexed((0 to emptyArray<Contiguous>())) { index, acc, c ->
@@ -94,12 +90,13 @@ object Day09 {
         }
 
         fun getReorderedChecksumContiguous(): Long {
-            val contiguous = getContiguous()
-            val reorderedContiguous = reorderContiguous(contiguous)
-            return reorderedContiguous.withIndex().filter { it.value is File }.fold(0L) { acc, indexedBlock ->
+            return getChecksum(reorderContiguous(getContiguous()))
+        }
+
+        private fun getChecksum(reorderedBlocks: Array<Block>) =
+            reorderedBlocks.withIndex().filter { it.value is File }.fold(0L) { acc, indexedBlock ->
                 acc + indexedBlock.index * (indexedBlock.value as File).id
             }
-        }
 
         private fun Block.repeat(n: Int) = (1..n).map { this }.toTypedArray()
     }
