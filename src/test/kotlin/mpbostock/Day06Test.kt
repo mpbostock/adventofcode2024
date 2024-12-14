@@ -7,27 +7,29 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 internal class Day06Test {
-    private val testData = LabMap.fromInput(listOf(
-        "....#.....",
-        ".........#",
-        "..........",
-        "..#.......",
-        ".......#..",
-        "..........",
-        ".#..^.....",
-        "........#.",
-        "#.........",
-        "......#..."
-    ))
+  private val testData = LabMap.fromInput(
+    listOf(
+      "....#.....",
+      ".........#",
+      "..........",
+      "..#.......",
+      ".......#..",
+      "..........",
+      ".#..^.....",
+      "........#.",
+      "#.........",
+      "......#..."
+    )
+  )
 
-    @Test
-    fun `test part one`() {
-        assertEquals(41, partOne(testData))
-    }
+  @Test
+  fun `test part one`() {
+    assertEquals(41, partOne(testData))
+  }
 
-    @Test
-    fun `test part two`() {
-        assertEquals(6, partTwo(testData))
-    }
+  @Test
+  fun `test part two`() {
+    assertEquals(6, partTwo(testData))
+  }
 
 }
