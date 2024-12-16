@@ -8,33 +8,33 @@ object Day11 {
   private val input = FileIO.readInput("day11input.txt") { s -> s }
 
   class PlutonianPebbles(private val startingPebbles: List<Long>) {
-    fun blink(n: Int): Long = startingPebbles.sumOf { stoneCounter(it, n) }
+    fun blink(n: Int): Long = startingPebbles.sumOf { pebbleCounter(it, n) }
 
     companion object {
       fun fromInput(input: List<String>): PlutonianPebbles {
         return PlutonianPebbles(input[0].split(' ').map { it.toLong() })
       }
 
-      val blink: (stone: Long) -> List<Long> = run {
+      val blink: (pebble: Long) -> List<Long> = run {
         val cache = mutableMapOf<Long, List<Long>>()
-        return@run { stone: Long ->
-          cache.getOrPut(stone) {
+        return@run { pebble: Long ->
+          cache.getOrPut(pebble) {
             when {
-              stone == 0L -> listOf(1L)
-              stone.numDigits() % 2 == 0 -> stone.splitInHalf()
-              else -> listOf(stone * 2024L)
+              pebble == 0L -> listOf(1L)
+              pebble.numDigits() % 2 == 0 -> pebble.splitInHalf()
+              else -> listOf(pebble * 2024L)
             }
           }
         }
       }
 
-      val stoneCounter: (stone: Long, numBlinks: Int) -> Long = run {
+      val pebbleCounter: (pebble: Long, numBlinks: Int) -> Long = run {
         val cache = mutableMapOf<Pair<Long, Int>, Long>()
-        return@run { stone, numBlinks ->
-          cache.getOrPut(stone to numBlinks) {
+        return@run { pebble, numBlinks ->
+          cache.getOrPut(pebble to numBlinks) {
             when {
               numBlinks == 0 -> 1L
-              else -> blink(stone).sumOf { stoneCounter(it, numBlinks - 1) }
+              else -> blink(pebble).sumOf { pebbleCounter(it, numBlinks - 1) }
             }
           }
         }

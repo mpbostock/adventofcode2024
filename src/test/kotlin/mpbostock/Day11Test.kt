@@ -33,35 +33,35 @@ internal class Day11Test {
   }
 
   @Test
-  fun `blink returns stone multiplied by 2024`() {
+  fun `blink returns pebble multiplied by 2024`() {
     assertEquals(listOf(2024L), PlutonianPebbles.blink(1L))
   }
 
   @Test
-  fun `blink returns 1 if stone is 0`() {
+  fun `blink returns 1 if pebble is 0`() {
     assertEquals(listOf(1L), PlutonianPebbles.blink(0L))
   }
 
   @Test
-  fun `blink splits stone if has even digits`() {
+  fun `blink splits pebble if has even digits`() {
     assertEquals(listOf(1000L, 1000L), PlutonianPebbles.blink(10_001_000L))
   }
 
   @Test
-  fun `number of stones after one blink is one`() {
-    assertEquals(1, PlutonianPebbles.stoneCounter(125L, 1))
-    assertEquals(1, PlutonianPebbles.stoneCounter(0L, 1))
+  fun `number of pebbles after one blink is one`() {
+    assertEquals(1, PlutonianPebbles.pebbleCounter(125L, 1))
+    assertEquals(1, PlutonianPebbles.pebbleCounter(0L, 1))
   }
 
   @Test
-  fun `number of stones after one blink is two if split`() {
-    assertEquals(2, PlutonianPebbles.stoneCounter(17L, 1))
-    assertEquals(2, PlutonianPebbles.stoneCounter(10_001_000L, 1))
+  fun `number of pebbles after one blink is two if split`() {
+    assertEquals(2, PlutonianPebbles.pebbleCounter(17L, 1))
+    assertEquals(2, PlutonianPebbles.pebbleCounter(10_001_000L, 1))
   }
 
   @Test
-  fun `number of stones after each blink is correct for test data`() {
-    val expectedNumberOfStones = mapOf(
+  fun `number of pebbles after each blink is correct for test data`() {
+    val expectedNumberOfPebbles = mapOf(
       1 to 3L,
       2 to 4L,
       3 to 5L,
@@ -69,8 +69,8 @@ internal class Day11Test {
       5 to 13L,
       6 to 22L
     )
-    expectedNumberOfStones.forEach { (numBlinks, numStones) ->
-      assertEquals(numStones, PlutonianPebbles.fromInput(testData).blink(numBlinks))
+    expectedNumberOfPebbles.forEach { (numBlinks, expectedNumPebbles) ->
+      assertEquals(expectedNumPebbles, PlutonianPebbles.fromInput(testData).blink(numBlinks))
     }
   }
 
