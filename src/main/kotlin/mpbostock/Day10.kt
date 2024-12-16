@@ -19,11 +19,7 @@ object Day10 {
             .filter { getCell(it) == height + 1 }
         }
         return when {
-          height == 9 -> TrailHead(
-            visited.toSet().count { getCell(it) == 9 },
-            visited.count { getCell(it) == 9 }
-          )
-
+          height == 9 -> TrailHead(visited.toSet().count { getCell(it) == 9 }, visited.count { getCell(it) == 9 })
           moved.isEmpty() -> null
           else -> hike(height + 1, moved, visited + moved)
         }
@@ -36,14 +32,7 @@ object Day10 {
     companion object {
       private val possibleDirections = listOf(Direction.North, Direction.South, Direction.East, Direction.West)
       fun fromInput(input: List<String>): TopographicMap {
-        return TopographicMap(
-          Grid.fromInput(
-            input,
-            -1,
-            { c -> c.digitToIntOrNull() ?: -1 },
-            { c, _ -> c == '0' }
-          )
-        )
+        return TopographicMap(Grid.fromInput(input, -1, { c -> c.digitToIntOrNull() ?: -1 }, { c, _ -> c == '0' }))
       }
     }
   }

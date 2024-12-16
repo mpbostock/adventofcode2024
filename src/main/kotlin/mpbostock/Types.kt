@@ -72,6 +72,17 @@ data class Line(val start: Coordinate, val end: Coordinate) {
 }
 
 fun Int.isOdd(): Boolean = this % 2 == 1
+fun Long.numDigits(): Int = when (this) {
+  in 0..9 -> 1
+  else -> 1 + (this / 10).numDigits()
+}
+fun Long.splitInHalf(numDigits: Int = this.numDigits()): List<Long> {
+  var divisor = 1
+  for (i in 0 until numDigits / 2) {
+    divisor *= 10
+  }
+  return listOf(this / divisor, this % divisor)
+}
 enum class Direction : PositionMover {
   North, NorthEast, East, SouthEast, South, SouthWest, West, NorthWest;
 
